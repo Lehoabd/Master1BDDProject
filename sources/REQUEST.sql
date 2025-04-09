@@ -1,94 +1,83 @@
--- Requête 1 : Afficher les compétiteurs ayant participé à un concours en 2024
-
-SELECT DISTINCT c.nom, c.prenom
+-- Requête 1 : Compétiteurs ayant participé à un concours en 2024
+SELECT u.numUtilisateur, u.nom, u.prenom
 FROM Competiteur c
+JOIN Utilisateur u ON c.numCompetiteur = u.numUtilisateur
 JOIN ParticipeCompetiteur pc ON c.numCompetiteur = pc.numCompetiteur
 JOIN Concours co ON pc.numConcours = co.numConcours
 WHERE EXTRACT(YEAR FROM co.dateDebut) = 2024;
 
-
--- Requête 2 : Afficher les dessins évalués en 2023 avec la note et les infos associées
-
-SELECT d.numDessin, d.commentaire, d.classement, e.note, e.dateEvaluation, e.commentaire AS commentaire_evaluation
+-- Requête 2 : Dessins évalués en 2023 avec note et infos
+SELECT d.numDessin, d.commentaire, d.classement, e.note, e.dateEvaluation
 FROM Dessin d
 JOIN Evaluation e ON d.numDessin = e.numDessin
 WHERE EXTRACT(YEAR FROM e.dateEvaluation) = 2023;
 
-
 -- Requête 3 : Informations sur tous les dessins évalués
-
-SELECT d.numDessin, d.commentaire, d.classement, e.note, e.dateEvaluation, e.commentaire AS commentaire_evaluation
+SELECT d.numDessin, d.commentaire, d.classement, d.dateRemise, e.note, e.dateEvaluation
 FROM Dessin d
 JOIN Evaluation e ON d.numDessin = e.numDessin;
 
-
 -- Requête 4 : Compétiteurs ayant participé à tous les concours de 2023 et 2024
-
-SELECT c.nom, c.prenom
+SELECT u.numUtilisateur, u.nom, u.prenom
 FROM Competiteur c
-JOIN ParticipeCompetiteur pc ON c.numCompetiteur = pc.numCompetiteur
-JOIN Concours co ON pc.numConcours = co.numConcours
-WHERE EXTRACT(YEAR FROM co.dateDebut) IN (2023, 2024)
-GROUP BY c.numCompetiteur
-HAVING COUNT(DISTINCT EXTRACT(YEAR FROM co.dateDebut)) = 2;
+JOIN Utilisateur u ON c.numCompetiteur = u.numUtilisateur
+WHERE NOT EXISTS (
+    SELECT co.numConcours
+    FROM Concours co
+    WHERE EXTRACT(YEAR FROM co.dateDebut) IN (2023, 2024)
+    AND NOT EXISTS (
+        SELECT 1 FROM ParticipeCompetiteur pc
+        WHERE pc.numCompetiteur = c.numCompetiteur
+        AND pc.numConcours = co.numConcours
+    )
+);
 
-
--- Requête 5 : Région avec la meilleure moyenne de notes des dessins
-
-SELECT cl.region, AVG(e.note) AS moyenne_notes
+-- Requête 5 : Région avec la meilleure moyenne des notes
+SELECT cl.region, AVG(e.note) AS moyenne_note
 FROM Club cl
 JOIN Utilisateur u ON cl.numClub = u.numClub
 JOIN Competiteur c ON u.numUtilisateur = c.numCompetiteur
-JOIN ParticipeCompetiteur pc ON c.numCompetiteur = pc.numCompetiteur
-JOIN Concours co ON pc.numConcours = co.numConcours
-JOIN Dessin d ON co.numConcours = d.numConcours
+JOIN Dessin d ON c.numCompetiteur = d.numCompetiteur
 JOIN Evaluation e ON d.numDessin = e.numDessin
 GROUP BY cl.region
-ORDER BY moyenne_notes DESC
+ORDER BY moyenne_note DESC
 LIMIT 1;
-
 
 -- Requête 6 : Nombre de dessins soumis par chaque compétiteur
-
-SELECT c.nom, c.prenom, COUNT(d.numDessin) AS nombre_dessins
+SELECT u.numUtilisateur, u.nom, u.prenom, COUNT(d.numDessin) AS nb_dessins
 FROM Competiteur c
-JOIN Dessin d ON c.numCompetiteur = d.numCompetiteur
-GROUP BY c.numCompetiteur;
-
+JOIN Utilisateur u ON c.numCompetiteur = u.numUtilisateur
+LEFT JOIN Dessin d ON c.numCompetiteur = d.numCompetiteur
+GROUP BY u.numUtilisateur, u.nom, u.prenom;
 
 -- Requête 7 : Nombre d'évaluations faites par chaque évaluateur
-
-SELECT e.numEvaluateur, COUNT(ev.numDessin) AS nombre_evaluations
-FROM Evaluateur e
-JOIN Evaluation ev ON e.numEvaluateur = ev.numEvaluateur
-GROUP BY e.numEvaluateur;
-
+SELECT u.numUtilisateur, u.nom, u.prenom, COUNT(e.numDessin) AS nb_evaluations
+FROM Evaluateur ev
+JOIN Utilisateur u ON ev.numEvaluateur = u.numUtilisateur
+LEFT JOIN Evaluation e ON ev.numEvaluateur = e.numEvaluateur
+GROUP BY u.numUtilisateur, u.nom, u.prenom;
 
 -- Requête 8 : Liste des concours et leur nombre de compétiteurs
-
-SELECT co.numConcours, co.theme, COUNT(pc.numCompetiteur) AS nombre_competiteurs
+SELECT co.numConcours, co.theme, COUNT(pc.numCompetiteur) AS nb_competiteurs
 FROM Concours co
-JOIN ParticipeCompetiteur pc ON co.numConcours = pc.numConcours
-GROUP BY co.numConcours;
+LEFT JOIN ParticipeCompetiteur pc ON co.numConcours = pc.numConcours
+GROUP BY co.numConcours, co.theme;
 
-
--- Requête 9 : Compétiteur avec la meilleure note moyenne sur tous ses dessins
-
-SELECT c.nom, c.prenom, AVG(e.note) AS moyenne_notes
+-- Requête 9 : Compétiteur avec la meilleure note moyenne
+SELECT u.numUtilisateur, u.nom, u.prenom, AVG(e.note) AS moyenne_note
 FROM Competiteur c
+JOIN Utilisateur u ON c.numCompetiteur = u.numUtilisateur
 JOIN Dessin d ON c.numCompetiteur = d.numCompetiteur
 JOIN Evaluation e ON d.numDessin = e.numDessin
-GROUP BY c.numCompetiteur
-ORDER BY moyenne_notes DESC
+GROUP BY u.numUtilisateur, u.nom, u.prenom
+ORDER BY moyenne_note DESC
 LIMIT 1;
 
-
--- Requête 10 : Compétiteurs ayant participé à un concours sans recevoir d’évaluation
-
-SELECT c.nom, c.prenom
+-- Requête 10 : Compétiteurs ayant participé à un concours sans recevoir d'évaluation
+SELECT DISTINCT u.numUtilisateur, u.nom, u.prenom
 FROM Competiteur c
+JOIN Utilisateur u ON c.numCompetiteur = u.numUtilisateur
 JOIN ParticipeCompetiteur pc ON c.numCompetiteur = pc.numCompetiteur
-JOIN Concours co ON pc.numConcours = co.numConcours
-LEFT JOIN Dessin d ON co.numConcours = d.numConcours AND d.numCompetiteur = c.numCompetiteur
+LEFT JOIN Dessin d ON c.numCompetiteur = d.numCompetiteur
 LEFT JOIN Evaluation e ON d.numDessin = e.numDessin
 WHERE e.numDessin IS NULL;

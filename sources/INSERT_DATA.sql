@@ -1,3 +1,6 @@
+-- Suppression des données existantes
+TRUNCATE TABLE Evaluation, Dessin, ParticipeCompetiteur, ParticipeClub, MembreJury, Concours, Dirige, Administrateur, Directeur, Competiteur, Evaluateur, Président, Utilisateur, Club RESTART IDENTITY CASCADE;
+
 INSERT INTO Club (nomClub, adresse, numTelephone, nombreAdherents, ville, departement, region) VALUES
 ('ArtClub Paris', '12 Rue des Arts, 75001 Paris', '0145896321', 150, 'Paris', 'Île-de-France', 'Île-de-France'),
 ('DesignHub Lyon', '45 Avenue du Design, 69003 Lyon', '0478529632', 200, 'Lyon', 'Rhône', 'Auvergne-Rhône-Alpes'),
