@@ -1,5 +1,5 @@
 -- Requête 1 : Compétiteurs ayant participé à un concours en 2024
-SELECT 
+SELECT
     u.nom,
     u.prenom,
     u.age,
