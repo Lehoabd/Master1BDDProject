@@ -133,22 +133,22 @@ INSERT INTO Evaluateur (numEvaluateur, specialite) VALUES
 
 INSERT INTO Competiteur (numCompetiteur, datePremParticipation)
 VALUES
-(41, '2023-01-10'),
-(42, '2023-02-15'),
-(43, '2023-03-12'),
-(44, '2023-04-20'),
-(45, '2023-05-18'),
-(46, '2023-06-25'),
-(47, '2023-07-30'),
-(48, '2023-08-05'),
-(49, '2023-09-12'),
-(50, '2023-10-18'),
-(51, '2023-11-24'),
-(52, '2023-12-30'),
-(53, '2024-01-12'),
-(54, '2024-02-14'),
-(55, '2024-03-22'),
-(56, '2024-04-18');
+(7, '2023-01-10'),
+(15, '2023-02-15'),
+(2, '2023-03-12'),
+(19, '2023-04-20'),
+(11, '2023-05-18'),
+(4, '2023-06-25'),
+(10, '2023-07-30'),
+(6, '2023-08-05'),
+(3, '2023-09-12'),
+(20, '2023-10-18'),
+(1, '2023-11-24'),
+(9, '2023-12-30'),
+(12, '2024-01-12'),
+(17, '2024-02-14'),
+(14, '2024-03-22'),
+(18, '2024-04-18');
 
 
 -- INSERT INTO Administrateur (numAdministrateur, dateDebut) VALUES
@@ -157,9 +157,9 @@ VALUES
 
 INSERT INTO Administrateur (numAdministrateur, dateDebut)
 VALUES
-(61, '2022-01-01'),
-(62, '2022-02-01'),
-(63, '2022-03-01');
+(5, '2022-01-01'),
+(13, '2022-02-01'),
+(8, '2022-03-01');
 
 
 -- INSERT INTO Directeur (numDirecteur, dateDebut) VALUES
@@ -251,9 +251,12 @@ VALUES
 
 INSERT INTO ParticipeCompetiteur (numCompetiteur, numConcours)
 VALUES
-(41, 1), (42, 1), (43, 1), (44, 1), (45, 1), (46, 1),
-(47, 1), (48, 1), (49, 1), (50, 1), (51, 1), (52, 1);
-
+(7, 1), (15, 1), (2, 1),
+(19, 2), (11, 2), (4, 2),
+(10, 3), (6, 3), (3, 3),
+(20, 4), (1, 4), (9, 4),
+(12, 5), (17, 5),
+(14, 6), (18, 6);
 
 -- INSERT INTO Dessin (commentaire, classement, dateRemise, leDessin, numConcours, numCompetiteur) VALUES
 -- ('Belle composition', 1, '2025-05-12', decode('89504E470D0A1A0A', 'hex'), 1, 3),
@@ -262,12 +265,12 @@ VALUES
 
 INSERT INTO Dessin (numDessin, commentaire, classement, dateRemise, leDessin, numConcours, numCompetiteur)
 VALUES
-(1, 'Premier dessin', 1, '2023-01-20', 'image1.png', 1, 1),
-(2, 'Deuxieme dessin', 2, '2023-01-20', 'image2.png', 1, 2),
-(3, 'Troisieme dessin', 3, '2023-01-21', 'image3.png', 1, 3),
-(4, 'Quatrieme dessin', 4, '2023-01-21', 'image4.png', 1, 4),
-(5, 'Cinquieme dessin', 5, '2023-01-22', 'image5.png', 1, 5),
-(6, 'Sixieme dessin', 6, '2023-01-22', 'image6.png', 1, 6);
+(1, 'Premier dessin', 1, '2023-01-20', 'image1.png', 1, 7),
+(2, 'Deuxieme dessin', 2, '2023-01-20', 'image2.png', 1, 15),
+(3, 'Troisieme dessin', 3, '2023-01-21', 'image3.png', 1, 2),
+(4, 'Quatrieme dessin', 4, '2023-01-21', 'image4.png', 1, 19),
+(5, 'Cinquieme dessin', 5, '2023-01-22', 'image5.png', 1, 17),
+(6, 'Sixieme dessin', 6, '2023-01-22', 'image6.png', 1, 18);
 
 
 -- INSERT INTO Evaluation (numDessin, numEvaluateur, dateEvaluation, note, commentaire) VALUES
@@ -277,8 +280,8 @@ VALUES
 
 INSERT INTO Evaluation (numDessin, numEvaluateur, dateEvaluation, note, commentaire)
 VALUES
-(1, 11, '2023-01-25', 15, 'Bon dessin'),
-(1, 12, '2023-01-25', 14, 'Original');
+(1, 20, '2023-01-25', 15, 'Bon dessin'),
+(1, 19, '2023-01-25', 8, 'Original');
 
 
 -- INSERT INTO MembreJury (numConcours, numEvaluateur) VALUES
@@ -288,4 +291,4 @@ VALUES
 
 INSERT INTO MembreJury (numConcours, numEvaluateur)
 VALUES
-(1, 11), (1, 12), (1, 13), (1, 14), (1, 15), (1, 16);
+(1, 20), (1, 15), (1, 19), (1, 8);
