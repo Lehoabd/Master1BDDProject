@@ -1,5 +1,8 @@
 {
   "dependencies": {
-    "bootstrap": "^5.3.5"
+    "bootstrap": "^5.3.5",
+    "pg": "^8.14.1",
+    "postgre": "^0.1.8",
+    "postgres": "^3.4.5"
   }
 }
