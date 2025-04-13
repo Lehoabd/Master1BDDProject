@@ -22,8 +22,9 @@
         </div>
     </div>
 </header>
-
-{@render children()}
+<div class="mt-5">
+    {@render children()}
+</div>
 
 <style>
     header {
