@@ -204,7 +204,7 @@ INSERT INTO Competiteur (numCompetiteur, datePremParticipation) VALUES
 (47, '2023-03-01'), -- N'a jamais déposé de dessin
 (48, '2023-03-01'), -- N'a jamais déposé de dessin
 (49, '2023-03-01'), -- N'a jamais déposé de dessin
-(50, '2023-03-01')  -- N'a jamais déposé de dessin
+(50, '2023-03-01');  -- N'a jamais déposé de dessin
 
 
 INSERT INTO Administrateur (numAdministrateur, dateDebut) VALUES
