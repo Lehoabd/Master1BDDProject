@@ -18,6 +18,3 @@ function initApp(){
     db.isUp();
 
 }
-
-
-db.queryDebug("select * from utilisateur");

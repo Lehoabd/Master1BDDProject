@@ -10,7 +10,7 @@
         <div class="col-lg-8">
           <h2 class="fw-bold">À propos du Concours</h2>
           <p class="text-muted">
-            Bienvenue sur notre site officiel du <strong>Concours de Dessin</strong> ! Un espace dédié à la créativité, à l’expression artistique, et à la découverte de nouveaux talents.
+            Bienvenue sur notre site officiel du <strong>J'adore dessiner comme j'adore rire</strong> ! Un espace dédié à la créativité, à l’expression artistique, et à la découverte de nouveaux talents.
           </p>
         </div>
       </div>

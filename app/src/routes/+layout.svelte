@@ -1,8 +1,30 @@
 <script lang="ts">
-    import type { Snippet } from 'svelte';
+    import { onMount, type Snippet } from 'svelte';
     import type { LayoutData } from './$types';
+    import { cookies } from '$lib/outils/cookies';
 
     let { data, children }: { data: LayoutData, children: Snippet } = $props();
+
+    let nomUtilisateur: string = $state('');
+
+    async function fetchUserData(){
+        if(!cookies.get('userId')) return;
+        const apiUrl = `/api/utilisateur?numUtilisateur=${encodeURIComponent(cookies.get('userId'))}`;
+        const response = await fetch(apiUrl, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+            },
+        });
+
+        response.json().then((data) => {
+                nomUtilisateur = data.login;
+            });
+    }
+
+    onMount(()=>{
+        fetchUserData();
+    })
 </script>
 
 <header class="container mt-2">
@@ -17,7 +39,11 @@
                 <a class="mx-2" href="/">home</a>
                 <a class="mx-2" href="/about">a propos</a>
                 <a class="mx-2" href="/contact">contact</a>
-                <a class="mx-2" href="/login">connexion</a>
+                {#if nomUtilisateur}
+                    <a class="mx-2" href="/login">{nomUtilisateur}</a>
+                {:else}
+                    <a class="mx-2" href="/login">connexion</a>
+                {/if}
             </div>
         </div>
     </div>
