@@ -1,6 +1,7 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
     import { cookies } from "$lib/outils/cookies";
+    import { getUserLogin } from "$lib/outils/generalApiCommands";
     import type { PageData } from "./$types";
 
     let { data }: { data: PageData } = $props();
@@ -24,6 +25,7 @@
                 cookies.set("userId", data, 1);
                 console.log(cookies.get("userId"));
                 alert('Bienvenu !');
+                getUserLogin();
                 goto('/');
             }
         });
