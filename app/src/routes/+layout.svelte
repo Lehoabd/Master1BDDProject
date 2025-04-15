@@ -1,30 +1,17 @@
 <script lang="ts">
     import { onMount, type Snippet } from 'svelte';
     import type { LayoutData } from './$types';
-    import { cookies } from '$lib/outils/cookies';
+    import { nomLogin } from '$lib/outils/stores';
+    import { getUserLogin } from '$lib/outils/generalApiCommands';
 
     let { data, children }: { data: LayoutData, children: Snippet } = $props();
 
-    let nomUtilisateur: string = $state('');
-
-    async function fetchUserData(){
-        if(!cookies.get('userId')) return;
-        const apiUrl = `/api/utilisateur?numUtilisateur=${encodeURIComponent(cookies.get('userId'))}`;
-        const response = await fetch(apiUrl, {
-            method: "POST",
-            headers: {
-                "content-type": "application/json",
-            },
-        });
-
-        response.json().then((data) => {
-                nomUtilisateur = data.login;
-            });
-    }
+    let nomUtilisateur: string = $derived($nomLogin);
 
     onMount(()=>{
-        fetchUserData();
+        getUserLogin();
     })
+
 </script>
 
 <header class="container mt-2">
