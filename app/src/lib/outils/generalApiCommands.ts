@@ -16,6 +16,7 @@ export async function getUserLogin(){
         });
 }
 
+<<<<<<< HEAD
 export async function getUserClub(){
         if(!cookies.get('userId')) return;
     const apiUrl = `/api/club/byUserId/?numUtilisateur=${encodeURIComponent(cookies.get('userId'))}`;
@@ -28,3 +29,5 @@ export async function getUserClub(){
 
     return response.json();
 }
+=======
+>>>>>>> d27bbdef4d5b29371cfdace763863e70b0bd8946
