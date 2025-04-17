@@ -1,7 +1,7 @@
 <script lang="ts">
     import { goto } from "$app/navigation";
     import { cookies } from "$lib/outils/cookies";
-    import { getUserLogin } from "$lib/outils/generalApiCommands";
+    import { actualizeStores } from "$lib/outils/generalApiCommands";
     import type { PageData } from "./$types";
 
     let { data }: { data: PageData } = $props();
@@ -23,9 +23,8 @@
                 alert("Couple login/mdp erroné");
             } else {
                 cookies.set("userId", data, 1);
-                console.log(cookies.get("userId"));
                 alert('Bienvenu !');
-                getUserLogin();
+                actualizeStores();
                 goto('/');
             }
         });

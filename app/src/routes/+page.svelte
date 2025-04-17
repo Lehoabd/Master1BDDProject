@@ -39,7 +39,6 @@
         </div>
     </div>
     {/if}
-    {console.log(data)}
 {/await}
 
 <style>

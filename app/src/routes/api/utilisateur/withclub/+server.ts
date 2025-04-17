@@ -4,9 +4,9 @@ import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async ()=>{
     try {
-        const query = "SELECT utilisateur.*, administrateur.numadministrateur as admin FROM utilisateur LEFT JOIN administrateur ON administrateur.numadministrateur = utilisateur.numutilisateur";
+        const query = "SELECT utilisateur.*, administrateur.numadministrateur as admin, club.* FROM utilisateur LEFT JOIN administrateur ON administrateur.numadministrateur = utilisateur.numutilisateur JOIN club ON utilisateur.numclub = club.numclub";
         const dbResult = await db.query(query);
-          if (dbResult[0])
+          if (dbResult![0])
           {
             return json(dbResult);
           }

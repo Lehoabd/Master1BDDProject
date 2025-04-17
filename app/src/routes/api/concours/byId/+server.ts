@@ -1,14 +1,20 @@
-import { db } from '$lib/outils/db';
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
+import { db } from '$lib/outils/db';
 
-export const GET: RequestHandler = async ()=>{
+export const GET: RequestHandler = async ({url})=>{
+    const num = url.searchParams.get('numConcours');
+
+    if(!num){
+        return json({ error: 'Paramètre numConcours manquant' }, { status: 400 });
+    }
+
     try {
-        const query = "SELECT utilisateur.*, administrateur.numadministrateur as admin FROM utilisateur LEFT JOIN administrateur ON administrateur.numadministrateur = utilisateur.numutilisateur";
+        const query = "SELECT * FROM concours WHERE numconcours = "+num;
         const dbResult = await db.query(query);
           if (dbResult[0])
           {
-            return json(dbResult);
+            return json(dbResult[0]);
           }
           else
           {
@@ -20,5 +26,3 @@ export const GET: RequestHandler = async ()=>{
       }
 
     }
-
-    

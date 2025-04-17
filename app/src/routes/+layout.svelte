@@ -1,15 +1,15 @@
 <script lang="ts">
     import { onMount, type Snippet } from 'svelte';
     import type { LayoutData } from './$types';
-    import { nomLogin } from '$lib/outils/stores';
-    import { getUserLogin } from '$lib/outils/generalApiCommands';
+    import { nomLogin, userPrivilege } from '$lib/outils/stores';
+    import { actualizeStores } from '$lib/outils/generalApiCommands';
 
     let { data, children }: { data: LayoutData, children: Snippet } = $props();
 
     let nomUtilisateur: string = $derived($nomLogin);
 
     onMount(()=>{
-        getUserLogin();
+        actualizeStores();
     })
 
 </script>
@@ -23,13 +23,16 @@
         </div>
         <div class="row">
             <div class="col-12 mb-2">
-                <a class="mx-2" href="/">home</a>
-                <a class="mx-2" href="/about">a propos</a>
-                <a class="mx-2" href="/contact">contact</a>
+                <a class="mx-2" href="/">Home</a>
+                <a class="mx-2" href="/about">A propos</a>
+                <a class="mx-2" href="/contact">Contact</a>
+                {#if $userPrivilege}
+                    <a class="mx-2" href="/concours/creation">Créer un concours</a>
+                {/if}
                 {#if nomUtilisateur}
                     <a class="mx-2" href="/login">{nomUtilisateur}</a>
                 {:else}
-                    <a class="mx-2" href="/login">connexion</a>
+                    <a class="mx-2" href="/login">Connexion</a>
                 {/if}
             </div>
         </div>
