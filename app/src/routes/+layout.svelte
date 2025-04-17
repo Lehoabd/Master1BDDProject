@@ -18,21 +18,21 @@
     <div class="col-12 text-center">
         <div class="row">
             <div class="col-12 mt-3">
-                <h1>J'adore dessiner comme j'adore rire</h1>
+                <h1>✏️ J'adore dessiner comme j'adore rire 🖌️</h1>
             </div>
         </div>
         <div class="row">
             <div class="col-12 mb-2">
-                <a class="mx-2" href="/">Home</a>
-                <a class="mx-2" href="/about">A propos</a>
-                <a class="mx-2" href="/contact">Contact</a>
+                <a class="mx-2" href="/">🏠 Home</a>
+                <a class="mx-2" href="/about">📢 A propos</a>
+                <a class="mx-2" href="/contact">📢 Contact</a>
                 {#if $userPrivilege}
-                    <a class="mx-2" href="/concours/creation">Créer un concours</a>
+                    <a class="mx-2" href="/concours/creation">⚙️ Créer un concours</a>
                 {/if}
                 {#if nomUtilisateur}
-                    <a class="mx-2" href="/login">{nomUtilisateur}</a>
+                    <a class="mx-2" href="/login">🪪 {nomUtilisateur}</a>
                 {:else}
-                    <a class="mx-2" href="/login">Connexion</a>
+                    <a class="mx-2" href="/login">🪪 Connexion</a>
                 {/if}
             </div>
         </div>

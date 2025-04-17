@@ -1,3 +1,4 @@
+import { error } from "@sveltejs/kit";
 import { cookies } from "./cookies";
 import { nomLogin, userPrivilege } from "./stores";
 
@@ -20,6 +21,18 @@ export async function actualizeStores() {
 export async function getUserClub() {
     if (!cookies.get('userId')) return;
     const apiUrl = `/api/club/byUserId/?numUtilisateur=${encodeURIComponent(cookies.get('userId'))}`;
+    const response = await fetch(apiUrl, {
+        method: "GET",
+        headers: {
+            "content-type": "application/json",
+        },
+    });
+
+    return response.json();
+}
+
+export async function getConcours() {
+    const apiUrl = `/api/concours/`;
     const response = await fetch(apiUrl, {
         method: "GET",
         headers: {
@@ -70,6 +83,24 @@ export async function putConcours(theme: string, dateDeb: string, dateFin: strin
     const response = await fetch("/api/concours", {
         method: "POST",
         body: JSON.stringify({ theme, dateDeb, dateFin, descr, president }),
+        headers: {
+            "content-type": "application/json",
+        },
+    });
+
+    return response.json()
+}
+
+export async function putDessin(commentaire: string, file: FileList, numConcours: string, numCompetiteur: string) {
+
+    if(!file)
+    {
+        error(500, 'Aucun blob lors de l\'upload du dessin');
+    }
+
+    const response = await fetch("/api/concours", {
+        method: "POST",
+        body: JSON.stringify({ commentaire, file, numConcours}),
         headers: {
             "content-type": "application/json",
         },

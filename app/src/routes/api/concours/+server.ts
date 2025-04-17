@@ -3,7 +3,22 @@ import { db } from '$lib/outils/db';
 import { json } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async () => {
-    return new Response();
+
+  try {
+      const query = "SELECT * FROM concours;";
+      const dbResult = await db.query(query);
+        if (dbResult[0])
+        {
+          return json(dbResult);
+        }
+        else
+        {
+          return json(null);
+        }
+  }catch (error) {
+      console.error('Erreur DB:', error);
+      return json({ error: 'Erreur de base de données' }, { status: 500 });
+    }
 };
 
 export const POST: RequestHandler = async ({request})=>{

@@ -1,8 +1,19 @@
 <script lang="ts">
-    import type { PageData } from './$types';
+    import { goto } from "$app/navigation";
     import image from "$lib/images/aboutImage.webp"
+    import { cookies } from "$lib/outils/cookies";
+    import { isNotNull } from "$lib/outils/utils";
 
-    let { data }: { data: PageData } = $props();
+    function gotoBtn(){
+      if(isNotNull(cookies.get('userId'))){
+        goto('/');
+      }
+      else
+      {
+        goto('/login')
+      }
+    }
+
 </script>
 <section id="a-propos">
     <div class="container">
@@ -26,7 +37,7 @@
           <p>
             Rejoignez une communauté passionnée, partagez votre vision et tentez de remporter des prix incroyables. L'art est un langage universel – exprimez-vous à travers le dessin !
           </p>
-          <a href="#inscription" class="btn btn-primary mt-3">Participer au concours</a>
+          <button class="btn btn-primary mt-3" onclick={gotoBtn}>Participer à un concours</button>
         </div>
       </div>
     </div>
