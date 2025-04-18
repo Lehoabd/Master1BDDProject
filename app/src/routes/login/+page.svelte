@@ -2,12 +2,16 @@
     import { goto } from "$app/navigation";
     import { cookies } from "$lib/outils/cookies";
     import { actualizeStores } from "$lib/outils/generalApiCommands";
+    import { nomLogin } from "$lib/outils/stores";
+    import { isNull } from "$lib/outils/utils";
     import type { PageData } from "./$types";
 
     let { data }: { data: PageData } = $props();
 
     let login: string = $state("");
     let password: string = $state("");
+
+    let nomUtilisateur: string = $derived($nomLogin);
 
     async function btnConnexion() {
         const response = await fetch("/api/login", {
@@ -23,15 +27,20 @@
                 alert("Couple login/mdp erroné");
             } else {
                 cookies.set("userId", data, 1);
-                alert('Bienvenu !');
+                alert("Bienvenu !");
                 actualizeStores();
-                goto('/');
+                goto("/");
             }
         });
     }
 </script>
 
-<h3 class="text-center">Se connecter</h3>
+{#if isNull(nomUtilisateur)}
+    <h3 class="text-center">Se connecter</h3>
+{:else}
+    <h3 class="text-center">Changer d'utilisateur ?</h3>
+
+{/if}
 <div class="container">
     <div class="row justify-content-center mt-3">
         <div class="col-4">

@@ -109,3 +109,15 @@ export async function putDessin(commentaire: string, file: FileList, numConcours
     return response.json()
 }
 
+export async function getUtilisateursPresidentsWithClub() {
+    const apiUrl = `/api/utilisateur/president`;
+    const response = await fetch(apiUrl, {
+        method: "GET",
+        headers: {
+            "content-type": "application/json",
+        },
+    });
+
+    return response.json();
+}
+

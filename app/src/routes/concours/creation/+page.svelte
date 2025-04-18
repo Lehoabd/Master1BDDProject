@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import {
-        getUtilisateursWithClub,
+    getUtilisateursPresidentsWithClub,
         putConcours,
     } from "$lib/outils/generalApiCommands";
     import { isNull } from "$lib/outils/utils";
@@ -16,7 +16,7 @@
     let presidentInput: string;
 
     onMount(() => {
-        users = getUtilisateursWithClub();
+        users = getUtilisateursPresidentsWithClub();
     });
 
     function creerBtnClick() {
