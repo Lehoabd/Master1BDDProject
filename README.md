@@ -94,4 +94,4 @@ Un fois la partie Script mis en place, vous pouvez démarrer le serveur local Sv
 ~/Master1BDDProject/app$ npm run dev
 ```
 
-Félicitation, vous pouvez maintenant acceder à l'application web depuis le lien [localhost:5173](http://localhost:5137) 🥳 !
+Félicitation, vous pouvez maintenant acceder à l'application web depuis le lien [localhost:5173](http://localhost:5173) 🥳 !
