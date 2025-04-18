@@ -25,9 +25,9 @@
             <div class="col-12 mb-2">
                 <a class="mx-2" href="/">🏠 Home</a>
                 <a class="mx-2" href="/about">📢 A propos</a>
-                <a class="mx-2" href="/contact">📢 Contact</a>
+                <a class="mx-2" href="/contact">☎️ Contact</a>
                 {#if $userPrivilege}
-                    <a class="mx-2" href="/concours/creation">⚙️ Créer un concours</a>
+                    <a class="mx-2" href="/concours/creation">⚙️ Configuration</a>
                 {/if}
                 {#if nomUtilisateur}
                     <a class="mx-2" href="/login">🪪 {nomUtilisateur}</a>
