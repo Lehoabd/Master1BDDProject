@@ -70,6 +70,8 @@ Connection
 └ Password : admin
 ```
 
+Cliquez sur le bouton "Save 💾".
+
 Si votre fenêtre se ferme, félicitation, votre BDD est connecté à votre interface administrateur 🥳 !
 
 Vous pouvez maintenant tester nos fichiers [CREATE_TABLE.sql](https://github.com/Lehoabd/Master1BDDProject/blob/main/sources/CREATE_TABLE.sql), [INSERT_DATA.sql](https://github.com/Lehoabd/Master1BDDProject/blob/main/sources/INSERT_DATA.sql) et les requetes du fichier [REQUEST.sql](https://github.com/Lehoabd/Master1BDDProject/blob/main/sources/REQUEST.sql).
