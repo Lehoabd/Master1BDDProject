@@ -1,6 +1,6 @@
-import { json } from '@sveltejs/kit';
-import type { RequestHandler } from '../$types';
 import { db } from '$lib/outils/db';
+import { json } from '@sveltejs/kit';
+import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async ({url})=>{
     const numutilisateur = url.searchParams.get('numUtilisateur');
@@ -10,7 +10,7 @@ export const GET: RequestHandler = async ({url})=>{
     }
 
     try {
-        const query = "SELECT club.* FROM club JOIN utilisateur ON utilisateur.numclub = club.numclub WHERE utilisateur.numutilisateur = "+numutilisateur;
+        const query = "SELECT utilisateur.*, administrateur.numadministrateur as admin FROM utilisateur LEFT JOIN administrateur ON administrateur.numadministrateur = utilisateur.numutilisateur WHERE utilisateur.numutilisateur = "+numutilisateur;
         const dbResult = await db.query(query);
           if (dbResult[0])
           {
@@ -26,3 +26,5 @@ export const GET: RequestHandler = async ({url})=>{
       }
 
     }
+
+    
