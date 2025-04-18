@@ -11,7 +11,7 @@ Projet d'équipe, composé de Thomas DECAUDIN, Leho ERREÇARRET et Théo MAYANS
  ├ docs/
  │ └ {Documents et cahiers des charges}
  ├ nodes_modules/
- │ └ {Fichiers Node.js nécessaires pour l'application web}
+ │ └ {Fichiers Node.js nécessaires pour notre application web}
  ├ sources/
  │ ├ CREATE_TABLE.sql
  │ ├ INSERT_DATA.sql
@@ -30,16 +30,29 @@ Le projet se divise en deux parties :
  - Partie page web : l'application web Svelte pour requeter de manière interactive.
 
 
-## Partie Scripts
+## Prérequis
 
+Pour executer le projet, vous aurez besoin de :
+
+- [Docker](https://www.docker.com/) pour l'éxecution des conteneurs PostGresSQL et PGAdmin
+- [Node.js](https://nodejs.org/en/download) pour executer localement l'application web Svelte.
+
+## Partie Script
+
+Pour mettre en marche les serveurs PostGresSQL et PGAdmin, lancer les commandes suivantes (Linux)
 
 ```bash
-# create a new project in the current directory
-npx sv create
+# Naviguer dans le dossier sources
+~/Master1BDDProject$ cd sources/
 
-# create a new project in my-app
-npx sv create my-app
+# Executer le script "Docker compose"
+~/Master1BDDProject/sources$ docker compose up -d
 ```
+
+Vous pouvez désormais accéder a l'interface d'administration PGAdmin en utilisant comment identifiants :
+>Email : admin@admin.com
+
+>Mot de passe : admin
 
 ## Developing
 

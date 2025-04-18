@@ -5,7 +5,7 @@ export class db {
     static sql = postgres({
         user: 'admin',
         host: 'localhost',
-        database: 'bd',
+        database: 'Concours-dessin',
         password: 'admin',
         port: 5432,
     }) 
